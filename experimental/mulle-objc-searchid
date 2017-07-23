@@ -88,6 +88,8 @@ prettify_uniqueid()
 
 grep_library()
 {
+   log_debug "grep_library" "$*"
+
    local uniqueid="$1"
    local library="$2"
 
@@ -96,20 +98,33 @@ grep_library()
       return 1
    fi
 
+   log_fluff "Searching \"${library}\" ..."
+
+   local found
+
    case "${library}" in
       *.so|*.dylib)
-         mulle-objc-list -s "${library}" | fgrep "${uniqueid}"
+         found="`mulle-objc-list -s "${library}" 2> /dev/null | fgrep "${uniqueid}"`"
       ;;
 
       *)
-         mulle-objc-lista -s "${library}" | fgrep "${uniqueid}"
+         found="`mulle-objc-lista -s "${library}" 2> /dev/null | fgrep "${uniqueid}"`"
       ;;
    esac
+
+   if [ -z "${found}" ]
+   then
+      return 1
+   fi
+   log_verbose "${uniqueid} found in \"${library}\""
+   echo "${found}"
 }
 
 
 grep_libraries()
 {
+   log_debug "grep_libraries" "$*"
+
    local uniqueid="$1"
 
    IFS="
@@ -120,24 +135,41 @@ grep_libraries()
 
       case "$i" in
          *.a|*.lib)
-            grep_library "${uniqueid}" "$i" 2> /dev/null
+            if grep_library "${uniqueid}" "$i"
+            then
+               return 0
+            fi
          ;;
 
          *.so|*.dylib)
-            grep_library "${uniqueid}" "$i" 2> /dev/null
+            if grep_library "${uniqueid}" "$i"
+            then
+               return 0
+            fi
+         ;;
+
+         *)
+            log_fluff "Ignored \$i\""
          ;;
       esac
    done
 
    IFS="${DEFAULT_IFS}"
+
+   return 1
 }
 
 
 search()
 {
+   log_debug "search" "$*"
+
    local uniqueid="$1"; shift
 
    local folder
+   local old
+
+   old="${PWD}"
 
    if [ $# -eq 0 ]
    then
@@ -146,11 +178,16 @@ search()
       for folder in ${LIB_PATH}
       do
          IFS="${DEFAULT_IFS}"
-         (
-            cd "${folder}"
-            grep_libraries "${uniqueid}"
-         )
+
+         cd "${folder}"
+         if grep_libraries "${uniqueid}"
+         then
+            return
+         fi
+         cd "${old}"
       done
+      cd "${old}"
+
       IFS="${DEFAULT_IFS}"
    else
       while [ $# -ne 0 ]
@@ -160,11 +197,17 @@ search()
          for folder in ${LIB_PATH}
          do
             IFS="${DEFAULT_IFS}"
-            (
-               cd "${folder}"
-               grep_library "${uniqueid}" "${1}"
-            )
+
+            cd "${folder}"
+            if grep_library "${uniqueid}" "${1}"
+            then
+               return
+            fi
+            cd "${old}"
          done
+
+         cd "${old}"
+
          IFS="${DEFAULT_IFS}"
       done
    fi
@@ -175,6 +218,8 @@ search()
 main()
 {
    local LIB_PATH
+
+   local OPTION_SELECTOR="NO"
 
    while [ $# -ne 0 ]
    do
@@ -196,6 +241,10 @@ main()
             shift
 
             LIB_PATH="`add_path "${LIB_PATH}" "$1"`"
+         ;;
+
+         --selector)
+            OPTION_SELECTOR="YES"
          ;;
 
          -h|--help)
@@ -242,15 +291,42 @@ main()
    #
    # make uniqueid pretty for various formats
    #
-   uniqueid="`prettify_uniqueid "$1"`"
-   [ -z "${uniqueid}" ] && fail "malformed uniqueid \"$1\""
+   [ -z "${1}" ] && usage
+
+   if [ "${OPTION_SELECTOR}" = "YES" ]
+   then
+      if [ -z "`command -v mulle-objc-uniqueid`" ]
+      then
+         fail "mulle-objc-uniqueid not in PATH"
+      fi
+
+      uniqueid="`mulle-objc-uniqueid "$1"`"
+      log_info "@selector( $1) is ${uniqueid}"
+   else
+      uniqueid="`prettify_uniqueid "$1"`"
+   fi
+
+   [ -z "${uniqueid}" ] && fail "malformed input \"$1\""
    shift
 
-   search "${uniqueid}" "$@" | \
+   result="`search "${uniqueid}" "$@" | \
       sed "s|^${uniqueid};\\([^;]*\\).*$|\\1|" | \
       sed "s|^.*;${uniqueid};\\([^;]*\\).*$|\\1|" | \
       sed 's|^[-+]||' | \
-      sort -u
+      sort -u`"
+
+   if [ -z "${result}" ]
+   then
+      log_warning "${uniqueid} is unknown."
+      return 1
+   fi
+
+   if [ "${OPTION_SELECTOR}" = "NO" ]
+   then
+      log_info "@selector( $result) is ${uniqueid}"
+   fi
+
+   echo "${result}"
 }
 
 
