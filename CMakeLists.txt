@@ -17,7 +17,7 @@ endif()
 cmake_minimum_required( VERSION 3.13...99.99)
 
 
-project( mulle-objc-list VERSION 0.24.1 LANGUAGES C)
+project( mulle-objc-list VERSION 0.25.0 LANGUAGES C)
 
 
 ### mulle-sde environment
@@ -52,8 +52,8 @@ endif()
 # but we do need to link atinit and atexit normally
 
 if( LINK_PHASE)
-   list( REMOVE_ITEM ALL_LOAD_DEPENDENCY_LIBRARIES "${MULLE_OBJC_RUNTIME_LIBRARY}")
-   list( INSERT DEPENDENCY_LIBRARIES 0 "${MULLE_OBJC_RUNTIME_LIBRARY}")
+   list( REMOVE_ITEM ALL_LOAD_DEPENDENCY_LIBRARIES "${MULLE__OBJC__RUNTIME_LIBRARY}")
+   list( INSERT DEPENDENCY_LIBRARIES 0 "${MULLE__OBJC__RUNTIME_LIBRARY}")
    set( ALL_LOAD_DEPENDENCY_LIBRARIES
       ${ALL_LOAD_DEPENDENCY_LIBRARIES}
       CACHE INTERNAL "need to cache this"
@@ -66,13 +66,48 @@ endif()
 
 include( Executable)
 
+# only for Executable
+include( Motd OPTIONAL)
+
+# the main executable carries the special link options below
+set( _MULLE_OBJC_LIST_LINK_TARGET "${EXECUTABLE_LINK_TARGET}")
+
+#
+# Additional tools. These used to be built by mulle-objc-runtime and then by
+# the short-lived mulle-objc-tools project. The scripts in this project look
+# for them as siblings, so they are built and installed here.
+#
+unset( EXECUTABLE_IDENTIFIER)
+unset( EXECUTABLE_UPCASE_IDENTIFIER)
+unset( EXECUTABLE_DOWNCASE_IDENTIFIER)
+set( EXECUTABLE_NAME            mulle-objc-uniqueid)
+set( EXECUTABLE_SOURCES         ${UNIQUEID_SOURCES})
+set( EXECUTABLE_DEPENDENCY_NAMES "")
+
+include( Executable)
+
+# only for Executable
+include( Motd OPTIONAL)
+
+unset( EXECUTABLE_IDENTIFIER)
+unset( EXECUTABLE_UPCASE_IDENTIFIER)
+unset( EXECUTABLE_DOWNCASE_IDENTIFIER)
+set( EXECUTABLE_NAME            mulle-objc-signature)
+set( EXECUTABLE_SOURCES         ${SIGNATURE_SOURCES})
+set( EXECUTABLE_DEPENDENCY_NAMES "")
+
+include( Executable)
+
+# only for Executable
+include( Motd OPTIONAL)
+
 if( NOT SKIP_EXECUTABLE_INSTALL)
 
    include( InstallExecutable)
 
    # need this for mulle-atexit
    if( LINK_PHASE AND UNIX AND NOT APPLE)
-      target_link_options( "${EXECUTABLE_LINK_TARGET}"
+      target_link_options( "${_MULLE_OBJC_LIST_LINK_TARGET}"
          PUBLIC
             "SHELL:LINKER:--export-dynamic"
       )
@@ -82,7 +117,7 @@ if( NOT SKIP_EXECUTABLE_INSTALL)
 # see: https://john.nachtimwald.com/2012/07/15/calling-functions-in-exe-from-plugins-in-windows/
 #
    if( LINK_PHASE AND MSVC)
-      target_link_libraries( "${EXECUTABLE_LINK_TARGET}"
+      target_link_libraries( "${_MULLE_OBJC_LIST_LINK_TARGET}"
          "-export:__mulle_objc_loadinfo_callback"
          "-export:__mulle_objc_list_callback"
       )
@@ -91,7 +126,7 @@ if( NOT SKIP_EXECUTABLE_INSTALL)
 # not sure why this is suddenly needed "Executable" used to do this ?
 #
    if( LINK_PHASE AND APPLE)
-      set_target_properties("${EXECUTABLE_LINK_TARGET}" PROPERTIES
+      set_target_properties("${_MULLE_OBJC_LIST_LINK_TARGET}" PROPERTIES
           INSTALL_RPATH "@loader_path/../lib/;@loader_path/../Frameworks/"
           BUILD_RPATH "@loader_path/../lib/;@loader_path/../Frameworks/"
       )
@@ -106,6 +141,3 @@ DESTINATION "bin")
 endif()
 
 include( FinalOutput OPTIONAL)
-
-# only for Executable
-include( Motd OPTIONAL)

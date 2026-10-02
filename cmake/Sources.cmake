@@ -5,6 +5,19 @@ set( SOURCES
    src/main.c
 )
 
+#
+# The following tools used to be built by mulle-objc-runtime, then lived in
+# a short-lived mulle-objc-tools project. They are needed by the scripts in
+# this project (which look for a sibling executable), so they are built here.
+#
+set( UNIQUEID_SOURCES
+   src/mulle-objc-uniqueid/main.c
+)
+
+set( SIGNATURE_SOURCES
+   src/mulle-objc-signature/main.c
+)
+
 set( SCRIPTS
    mulle-objc-deps-tool
    mulle-objc-encode
@@ -16,6 +29,11 @@ set( SCRIPTS
    mulle-objc-unarchive
    mulle-objc-uncovered-methods
 )
+
+#
+# The scripts in bin/ (mulle-objc-reverse-uniqueid, print-methodid-defines)
+# are helper scripts that we keep, but do not install.
+#
 
 if( MSVC)
    set( SCRIPTS
