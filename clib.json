@@ -12,6 +12,8 @@
       "src/main.c",
       "src/mulle-objc-list-version.h",
       "src/mulle-objc-list.h",
+      "src/mulle-objc-signature/main.c",
+      "src/mulle-objc-uniqueid/main.c",
       "src/reflect/_mulle-objc-list-include-private.h",
       "src/reflect/_mulle-objc-list-include.h"
    ],

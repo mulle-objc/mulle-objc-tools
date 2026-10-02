@@ -7,20 +7,6 @@ It's useful when developing mulle-objc projects. It loads a shared library and
 dumps the mulle-objc load information contained within, for instance classes
 or categories. The output is as [CSV, euro-style](//en.wikipedia.org/wiki/Comma-separated_values).
 
-## Tools
-
-Besides `mulle-objc-list` itself this project builds and installs a few helper
-tools, which the shell scripts here use:
-
-| Tool | Description |
-|---|---|
-| `mulle-objc-uniqueid` | Prints the `@selector()` (uniqueid) value for one or more strings. |
-| `mulle-objc-signature` | Parses runtime signature strings and emits them as CSV. |
-
-Both link `mulle-objc-runtime` for the actual hash/signature implementation.
-The uninstalled helper scripts `bin/mulle-objc-reverse-uniqueid` and
-`bin/print-methodid-defines` are kept in the repository for development use.
-
 
 
 | Release Version                                       | Release Notes  | AI Documentation
@@ -212,6 +198,15 @@ file).
 ### Add as subproject with cmake and git
 
 ``` bash
+git submodule add -f --name "mulle-core" \
+                            "https://github.com/mulle-core/mulle-core.git" \
+                            "stash/mulle-core"
+git submodule add -f --name "libbacktrace" \
+                            "https://github.com/mulle-core/libbacktrace.git" \
+                            "stash/libbacktrace"
+git submodule add -f --name "mulle-core-all-load" \
+                            "https://github.com/mulle-core/mulle-core-all-load.git" \
+                            "stash/mulle-core-all-load"
 git submodule add -f --name "mulle-objc-runtime" \
                             "https://github.com/mulle-objc/mulle-objc-runtime.git" \
                             "stash/mulle-objc-runtime"
@@ -224,9 +219,15 @@ git submodule update --init --recursive
 ``` cmake
 add_subdirectory( stash/mulle-objc-list)
 add_subdirectory( stash/mulle-objc-runtime)
+add_subdirectory( stash/mulle-core-all-load)
+add_subdirectory( stash/libbacktrace)
+add_subdirectory( stash/mulle-core)
 
 target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-objc-list)
 target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-objc-runtime)
+target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-core-all-load)
+target_link_libraries( ${PROJECT_NAME} PUBLIC libbacktrace)
+target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-core)
 ```
 
 

@@ -91,3 +91,6 @@ workflow-new.log
 .kiro/
 TODO.md
 REVIEW.md
+.touch
+*.orig
+*.workspace
