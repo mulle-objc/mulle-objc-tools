@@ -5,10 +5,10 @@
       domain="github";
       language="c";
       dialect="c";
-      name="mulle-objc-list";
+      name="mulle-objc-tools";
       user="mulle-objc";
-      repo="mulle-objc-list";
-      homepage="https://github.com/mulle-objc/mulle-objc-list";
+      repo="mulle-objc-tools";
+      homepage="https://github.com/mulle-objc/mulle-objc-tools";
       version="0.25.0";
       license="BSD-3-Clause";
    };

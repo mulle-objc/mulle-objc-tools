@@ -27,7 +27,7 @@ else()
 endif()
 
 #
-# Generated from sourcetree: 1a4c5f04-6d19-477a-bfb7-55a189dd1e54;mulle-objc-runtime;no-bequeath,no-cmake-searchpath,no-header,no-import,no-singlephase;
+# Generated from sourcetree: 1a4c5f04-6d19-477a-bfb7-55a189dd1e54;mulle-objc-runtime;no-bequeath,no-cmake-searchpath,no-dynamic-link,no-header,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-objc-runtime no-link`
 # Disable for this platform: `mulle-sourcetree mark mulle-objc-runtime no-cmake-platform-${MULLE_UNAME}`
 # Disable for a sdk: `mulle-sourcetree mark mulle-objc-runtime no-cmake-sdk-<name>`
@@ -44,20 +44,14 @@ else()
       endforeach()
       if( NOT MULLE__OBJC__RUNTIME_LIBRARY)
          find_library( MULLE__OBJC__RUNTIME_LIBRARY NAMES
-            ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
-            ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_PREFERRED_LIBRARY_SUFFIX}
-            ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
-            ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_FALLBACK_LIBRARY_SUFFIX}
-            mulle-objc-runtime
+            ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+            ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_STATIC_LIBRARY_SUFFIX}
             NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_FIND_ROOT_PATH
          )
          if( NOT MULLE__OBJC__RUNTIME_LIBRARY AND NOT DEPENDENCY_IGNORE_SYSTEM_LIBRARIES)
             find_library( MULLE__OBJC__RUNTIME_LIBRARY NAMES
-               ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
-               ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_PREFERRED_LIBRARY_SUFFIX}
-               ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
-               ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_FALLBACK_LIBRARY_SUFFIX}
-               mulle-objc-runtime
+               ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+               ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_STATIC_LIBRARY_SUFFIX}
             )
          endif()
       endif()
@@ -128,10 +122,7 @@ else()
          endif()
    else()
       # Disable with: `mulle-sourcetree mark mulle-objc-runtime no-require-link`
-      message( SEND_ERROR "MULLE__OBJC__RUNTIME_LIBRARY was not found in ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
-${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_PREFERRED_LIBRARY_SUFFIX}
-${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
-${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-objc-runtime${MULLE_FALLBACK_LIBRARY_SUFFIX}
-mulle-objc-runtime")
+      message( SEND_ERROR "MULLE__OBJC__RUNTIME_LIBRARY was not found in ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+${CMAKE_STATIC_LIBRARY_PREFIX}mulle-objc-runtime${CMAKE_STATIC_LIBRARY_SUFFIX}")
    endif()
 endif()

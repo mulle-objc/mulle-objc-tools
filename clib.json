@@ -1,21 +1,21 @@
 {
-   "name" : "mulle-objc-list",
+   "name" : "mulle-objc-tools",
    "version" : "0.25.0",
    "description" : "📒 Lists mulle-objc runtime information contained in executables.",
    "keywords" : [],
    "license" : "BSD-3-Clause",
-   "repo" : "mulle-objc/mulle-objc-list",
+   "repo" : "mulle-objc/mulle-objc-tools",
    "src" : [
       "asset/dox/api/toc/index.md",
       "src/generic/include-private.h",
       "src/generic/include.h",
       "src/main.c",
-      "src/mulle-objc-list-version.h",
-      "src/mulle-objc-list.h",
+      "src/mulle-objc-tools-version.h",
+      "src/mulle-objc-tools.h",
       "src/mulle-objc-signature/main.c",
       "src/mulle-objc-uniqueid/main.c",
-      "src/reflect/_mulle-objc-list-include-private.h",
-      "src/reflect/_mulle-objc-list-include.h"
+      "src/reflect/_mulle-objc-tools-include-private.h",
+      "src/reflect/_mulle-objc-tools-include.h"
    ],
    "dependencies" : {
       "mulle-objc/mulle-objc-runtime": "*"

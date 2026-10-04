@@ -1,6 +1,6 @@
 //
 //  include-private.h
-//  mulle-objc-list
+//  mulle-objc-tools
 //
 //  Copyright (c) 2022 Nat! - Mulle kybernetiK.
 //  All rights reserved.
@@ -47,7 +47,7 @@
    sourcetree, then you don't need it.
  */
 
-#include "_mulle-objc-list-include-private.h"
+#include "_mulle-objc-tools-include-private.h"
 
 /* You can add some more include statements here */
 

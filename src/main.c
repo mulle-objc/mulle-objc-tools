@@ -69,7 +69,7 @@ typedef uint32_t   mulle_objc_universeid_t;
 #include <stdarg.h>
 #include <sys/stat.h>
 
-#include "mulle-objc-list-version.h"
+#include "mulle-objc-tools-version.h"
 
 
 #define MULLE_OBJC_DEPS_CLASSID  0x3c20656f

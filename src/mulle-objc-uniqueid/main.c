@@ -1,6 +1,6 @@
 //
 //  main.c
-//  mulle-objc-list
+//  mulle-objc-tools
 //
 //  Copyright (c) 2016 Nat! - Mulle kybernetiK.
 //  Copyright (c) 2016 Codeon GmbH.

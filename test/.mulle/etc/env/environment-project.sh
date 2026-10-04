@@ -8,7 +8,7 @@ export PROJECT_TYPE="none"
 #
 #
 #
-export PROJECT_NAME="mulle-objc-list"
+export PROJECT_NAME="mulle-objc-tools"
 
 
 #
@@ -39,5 +39,11 @@ export MULLE_SDE_CRAFT_TARGET="craftorder"
 #
 #
 
+
+
+#
+#
+#
+export TEST_PROJECT_NAME="mulle-objc-tools"
 
 

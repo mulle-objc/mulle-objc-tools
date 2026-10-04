@@ -12,5 +12,5 @@ src/generic
 
 
 set( PUBLIC_HEADERS
-   src/mulle-objc-list.h
+   src/mulle-objc-tools.h
 )

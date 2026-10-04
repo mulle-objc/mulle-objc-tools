@@ -1,6 +1,6 @@
 //
-//  mulle-objc-list-version.h
-//  mulle-objc-list
+//  mulle-objc-tools-version.h
+//  mulle-objc-tools
 //
 //  Copyright (c) 2020 Nat! - Mulle kybernetiK.
 //  All rights reserved.

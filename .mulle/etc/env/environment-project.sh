@@ -1,7 +1,7 @@
 #
 #
 #
-export PROJECT_NAME="mulle-objc-list"
+export PROJECT_NAME="mulle-objc-tools"
 
 
 #

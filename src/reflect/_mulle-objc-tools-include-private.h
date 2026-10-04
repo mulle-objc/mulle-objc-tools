@@ -3,7 +3,7 @@
  *   `mulle-sde reflect` and any edits will be lost.
  *   Suppress generation of this file with:
  *
- *      mulle-sde environment --global set MULLE_SOURCETREE_TO_C_INCLUDE_FILE DISABLE
+ *      mulle-sde environment --global set MULLE_SOURCETREE_TO_C_PRIVATEINCLUDE_FILE DISABLE
  *
  *   To not let mulle-sourcetree-to-c generate any header files:
  *
@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef _mulle_objc_list_include_h__
-#define _mulle_objc_list_include_h__
+#ifndef _mulle_objc_tools_include_private_h__
+#define _mulle_objc_tools_include_private_h__
 
 /* no headers */
 

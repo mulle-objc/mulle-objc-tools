@@ -1,12 +1,12 @@
 # if( "$ENV{CC}" MATCHES "^musl-mulle-*")
 #    unset( ENV{CC})
-#    message( STATUS "Ignore CC environment, as mulle-objc-list can't be built with musl-mulle")
+#    message( STATUS "Ignore CC environment, as mulle-objc-tools can't be built with musl-mulle")
 #    set( ENV{CFLAGS} "-fPIC -fno-common")
 #    message( STATUS "Set ENV{CFLAGS} to $ENV{CFLAGS}")
 # endif()
 #
 
-# try_compile(), triggered by project( mulle-objc-list C) will have problems
+# try_compile(), triggered by project( mulle-objc-tools C) will have problems
 # linking an executable, but we don't care
 
 if( MULLE_MUSL_STATIC OR COSMOPOLITAN)
@@ -17,7 +17,7 @@ endif()
 cmake_minimum_required( VERSION 3.13...99.99)
 
 
-project( mulle-objc-list VERSION 0.25.0 LANGUAGES C)
+project( mulle-objc-tools VERSION 0.25.0 LANGUAGES C)
 
 
 ### mulle-sde environment
@@ -64,13 +64,15 @@ if( LINK_PHASE)
    )
 endif()
 
+set( EXECUTABLE_NAME mulle-objc-list)
+
 include( Executable)
 
 # only for Executable
 include( Motd OPTIONAL)
 
 # the main executable carries the special link options below
-set( _MULLE_OBJC_LIST_LINK_TARGET "${EXECUTABLE_LINK_TARGET}")
+set( _MULLE__OBJC__TOOLS_LINK_TARGET "${EXECUTABLE_LINK_TARGET}")
 
 #
 # Additional tools. These used to be built by mulle-objc-runtime and then by
@@ -107,7 +109,7 @@ if( NOT SKIP_EXECUTABLE_INSTALL)
 
    # need this for mulle-atexit
    if( LINK_PHASE AND UNIX AND NOT APPLE)
-      target_link_options( "${_MULLE_OBJC_LIST_LINK_TARGET}"
+      target_link_options( "${_MULLE__OBJC__TOOLS_LINK_TARGET}"
          PUBLIC
             "SHELL:LINKER:--export-dynamic"
       )
@@ -117,7 +119,7 @@ if( NOT SKIP_EXECUTABLE_INSTALL)
 # see: https://john.nachtimwald.com/2012/07/15/calling-functions-in-exe-from-plugins-in-windows/
 #
    if( LINK_PHASE AND MSVC)
-      target_link_libraries( "${_MULLE_OBJC_LIST_LINK_TARGET}"
+      target_link_libraries( "${_MULLE__OBJC__TOOLS_LINK_TARGET}"
          "-export:__mulle_objc_loadinfo_callback"
          "-export:__mulle_objc_list_callback"
       )
@@ -126,7 +128,7 @@ if( NOT SKIP_EXECUTABLE_INSTALL)
 # not sure why this is suddenly needed "Executable" used to do this ?
 #
    if( LINK_PHASE AND APPLE)
-      set_target_properties("${_MULLE_OBJC_LIST_LINK_TARGET}" PROPERTIES
+      set_target_properties("${_MULLE__OBJC__TOOLS_LINK_TARGET}" PROPERTIES
           INSTALL_RPATH "@loader_path/../lib/;@loader_path/../Frameworks/"
           BUILD_RPATH "@loader_path/../lib/;@loader_path/../Frameworks/"
       )

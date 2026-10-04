@@ -43,7 +43,7 @@ if( STANDALONE)
    endif()
 
    if( NOT STANDALONE_DEFINITIONS)
-      set( STANDALONE_DEFINITIONS ${MULLE__OBJC__LIST_DEFINITIONS})
+      set( STANDALONE_DEFINITIONS ${MULLE__OBJC__TOOLS_DEFINITIONS})
    endif()
 
    #
@@ -85,7 +85,7 @@ if( STANDALONE)
       if( NOT STANDALONE_SOURCES)
          message( FATAL_ERROR "You need to define STANDALONE_SOURCES. Add a file
 ${STANDALONE_LIBRARY_NAME}.c with contents like this to it:
-int  ___mulle__objc__list_unused__;
+int  ___mulle__objc__tools_unused__;
 and everybody will be happy")
       endif()
 

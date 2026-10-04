@@ -1,9 +1,9 @@
-# mulle-objc-list Library Documentation for AI
+# mulle-objc-tools Library Documentation for AI
 <!-- Keywords: introspection, runtime-query -->
 
 ## 1. Introduction & Purpose
 
-**mulle-objc-list** provides runtime metadata querying and enumeration utilities for mulle-objc. It enables inspection and listing of loaded classes, methods, protocols, and other runtime information. Useful for runtime introspection, dynamic code analysis, and documentation generation.
+**mulle-objc-tools** provides runtime metadata querying and enumeration utilities for mulle-objc. It enables inspection and listing of loaded classes, methods, protocols, and other runtime information. Useful for runtime introspection, dynamic code analysis, and documentation generation.
 
 This library is particularly useful for:
 - Runtime introspection of loaded classes
@@ -130,4 +130,4 @@ free(classes);
 
 ## 7. Version Information
 
-mulle-objc-list version macro: `MULLE_OBJC_LIST_VERSION`
+mulle-objc-tools version macro: `MULLE_OBJC_LIST_VERSION`

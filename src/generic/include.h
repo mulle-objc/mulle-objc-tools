@@ -1,6 +1,6 @@
 //
 //  include.h
-//  mulle-objc-list
+//  mulle-objc-tools
 //
 //  Copyright (c) 2022 Nat! - Mulle kybernetiK.
 //  All rights reserved.
@@ -42,7 +42,7 @@
    be moved to other projects and don't need to be edited. Also less typing...
 
    Therefore it is important that this file is called "include.h" and
-   not "mulle-objc-list-include.h" to keep the #include statements in the
+   not "mulle-objc-tools-include.h" to keep the #include statements in the
    library code uniform.
 
    The C-compiler will pick up the nearest one.
@@ -64,10 +64,10 @@
 #endif
 
 
-#include "_mulle-objc-list-include.h"
+#include "_mulle-objc-tools-include.h"
 
 /* You can add some more include statements here */
 
-#include "mulle-objc-list-version.h"
+#include "mulle-objc-tools-version.h"
 
 #endif

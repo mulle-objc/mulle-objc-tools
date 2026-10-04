@@ -1,17 +1,18 @@
-# mulle-objc-list
+# mulle-objc-tools
 
 #### 📒 Lists mulle-objc runtime information contained in executables.
 
-`mulle-objc-list` is a [mulle-objc](//github.com/mulle-objc) tool.
-It's useful when developing mulle-objc projects. It loads a shared library and
-dumps the mulle-objc load information contained within, for instance classes
-or categories. The output is as [CSV, euro-style](//en.wikipedia.org/wiki/Comma-separated_values).
+`mulle-objc-tools` are [mulle-objc](//github.com/mulle-objc) tools.
+They are useful when developing mulle-objc projects. The `mulle-objc-list` tool
+loads a shared library and dumps the mulle-objc load information contained
+within, for instance classes or categories. The output is as
+[CSV, euro-style](//en.wikipedia.org/wiki/Comma-separated_values).
 
 
 
 | Release Version                                       | Release Notes  | AI Documentation
 |-------------------------------------------------------|----------------|---------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-objc/mulle-objc-list.svg) [![Build Status](https://github.com/mulle-objc/mulle-objc-list/workflows/CI/badge.svg)](//github.com/mulle-objc/mulle-objc-list/actions) | [RELEASENOTES](RELEASENOTES.md) | [DeepWiki for mulle-objc-list](https://deepwiki.com/mulle-objc/mulle-objc-list)
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-objc/mulle-objc-tools.svg) [![Build Status](https://github.com/mulle-objc/mulle-objc-tools/workflows/CI/badge.svg)](//github.com/mulle-objc/mulle-objc-tools/actions) | [RELEASENOTES](RELEASENOTES.md) | [DeepWiki for mulle-objc-tools](https://deepwiki.com/mulle-objc/mulle-objc-tools)
 
 
 
@@ -154,7 +155,7 @@ mulle-sde init -d my-project -m mulle-objc/objc-developer executable
 cd my-project
 mulle-sde vibecoding on
 mulle-sde run
-mulle-sde dependency toc mulle-objc/mulle-objc-list
+mulle-sde dependency toc mulle-objc/mulle-objc-tools
 ```
 
 You are done, skip the following "Add" step.
@@ -162,26 +163,26 @@ You are done, skip the following "Add" step.
 
 ## Add
 
-Use [mulle-sde](//github.com/mulle-sde) to add mulle-objc-list to your project.
+Use [mulle-sde](//github.com/mulle-sde) to add mulle-objc-tools to your project.
 As long as your sources are using `#include "include-private.h"` and your headers use `#include "include.h"`, there will nothing more to do:
 
 ``` sh
-mulle-sde add github:mulle-objc/mulle-objc-list
+mulle-sde add github:mulle-objc/mulle-objc-tools
 ```
 
-To only add the sources of mulle-objc-list with all the sources of its
+To only add the sources of mulle-objc-tools with all the sources of its
 dependencies replace "github:" with [clib:](https://github.com/clibs/clib):
 
 ## Legacy adds
 
 One common denominator is that you will likely have to add
-`#include <mulle-objc-list/mulle-objc-list.h>` to your source files.
+`#include <mulle-objc-tools/mulle-objc-tools.h>` to your source files.
 
 
 ### Add sources to your project with clib
 
 ``` sh
-clib install --out src/mulle-objc mulle-objc/mulle-objc-list
+clib install --out src/mulle-objc mulle-objc/mulle-objc-tools
 ```
 
 Add `-isystem src/mulle-objc` to your `CFLAGS` and compile all the
@@ -210,20 +211,20 @@ git submodule add -f --name "mulle-core-all-load" \
 git submodule add -f --name "mulle-objc-runtime" \
                             "https://github.com/mulle-objc/mulle-objc-runtime.git" \
                             "stash/mulle-objc-runtime"
-git submodule add -f --name "mulle-objc-list" \
-                            "https://github.com/mulle-objc/mulle-objc-list" \
-                            "stash/mulle-objc-list"
+git submodule add -f --name "mulle-objc-tools" \
+                            "https://github.com/mulle-objc/mulle-objc-tools" \
+                            "stash/mulle-objc-tools"
 git submodule update --init --recursive
 ```
 
 ``` cmake
-add_subdirectory( stash/mulle-objc-list)
+add_subdirectory( stash/mulle-objc-tools)
 add_subdirectory( stash/mulle-objc-runtime)
 add_subdirectory( stash/mulle-core-all-load)
 add_subdirectory( stash/libbacktrace)
 add_subdirectory( stash/mulle-core)
 
-target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-objc-list)
+target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-objc-tools)
 target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-objc-runtime)
 target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-core-all-load)
 target_link_libraries( ${PROJECT_NAME} PUBLIC libbacktrace)
@@ -233,11 +234,11 @@ target_link_libraries( ${PROJECT_NAME} PUBLIC mulle-core)
 
 ## Install
 
-Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-objc-list and all dependencies:
+Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-objc-tools and all dependencies:
 
 ``` sh
 mulle-sde install --prefix /usr/local \
-   https://github.com/mulle-objc/mulle-objc-list/archive/latest.tar.gz
+   https://github.com/mulle-objc/mulle-objc-tools/archive/latest.tar.gz
 ```
 
 ### Legacy Installation
@@ -254,9 +255,9 @@ Install all requirements
 #### Download & Install
 
 
-Download the latest [tar](https://github.com/mulle-objc/mulle-objc-list/archive/refs/tags/latest.tar.gz) or [zip](https://github.com/mulle-objc/mulle-objc-list/archive/refs/tags/latest.zip) archive and unpack it.
+Download the latest [tar](https://github.com/mulle-objc/mulle-objc-tools/archive/refs/tags/latest.tar.gz) or [zip](https://github.com/mulle-objc/mulle-objc-tools/archive/refs/tags/latest.zip) archive and unpack it.
 
-Install **mulle-objc-list** into `/usr/local` with [cmake](https://cmake.org):
+Install **mulle-objc-tools** into `/usr/local` with [cmake](https://cmake.org):
 
 ``` sh
 PREFIX_DIR="/usr/local"
