@@ -10,9 +10,9 @@
       "src/generic/include-private.h",
       "src/generic/include.h",
       "src/main.c",
+      "src/mulle-objc-signature/main.c",
       "src/mulle-objc-tools-version.h",
       "src/mulle-objc-tools.h",
-      "src/mulle-objc-signature/main.c",
       "src/mulle-objc-uniqueid/main.c",
       "src/reflect/_mulle-objc-tools-include-private.h",
       "src/reflect/_mulle-objc-tools-include.h"
